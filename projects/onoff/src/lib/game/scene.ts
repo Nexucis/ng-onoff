@@ -84,8 +84,9 @@ export class Scene extends Body {
 
   set on(value) {
     this._on = value;
-    document.body.classList.toggle('on', value);
-    document.body.classList.toggle('off', !value);
+    const container = this.getGameContainer();
+    container.classList.toggle('on', value);
+    container.classList.toggle('off', !value);
   }
 
   get index() {
@@ -163,7 +164,7 @@ export class Scene extends Body {
     death.setAttribute('y', String(this.guy.y - 32 + this.guy.height / 2));
     this.guy.element.setAttribute('hidden', String(true));
     // TODO set classList to the current app container
-    const container = document.getElementById('onoff-game');
+    const container = this.getGameContainer();
     container.classList.add('dying');
     await sleep(700);
     container.classList.remove('dying');
@@ -241,5 +242,9 @@ export class Scene extends Body {
     } else if (this.guy.overlaps(this.goal)) {
       this.advance();
     }
+  }
+
+  getGameContainer(): HTMLElement {
+    return document.getElementById('onoff-game');
   }
 }
