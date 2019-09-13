@@ -6,7 +6,6 @@ import { Game } from './game';
 import { defaultLevel, Level } from './levels';
 import { Bar } from './bar';
 import { Spikes } from './spikes';
-import { DEATH_FX, GOAL_FX, JUMP_FX, playMusic, playWin } from './sound';
 import { upKey } from './keys';
 import sleep from './sleep';
 import { HEIGHT, WIDTH } from './dimensions';
@@ -143,7 +142,6 @@ export class Scene extends Body {
   }
 
   async advance() {
-    GOAL_FX.play();
     this.paused = true;
     document.body.classList.add('finish');
     await sleep(1000);
@@ -158,7 +156,6 @@ export class Scene extends Body {
   }
 
   async death() {
-    DEATH_FX.play();
     this.deaths.value += 1;
     this.paused = true;
     const death = document.getElementById('death');
@@ -235,9 +232,6 @@ export class Scene extends Body {
 
     if (bottom === 0) {
       this.guy.vy = upKey() ? -scale(1200) : 0;
-      if (upKey()) {
-        JUMP_FX.play();
-      }
     } else {
       this.guy.vy = Math.min(scale(600), this.guy.vy + scale(120));
     }

@@ -2,7 +2,6 @@ import { Title } from './title';
 import { Controls } from './controls';
 import { onPress } from './keys';
 import { Scene } from './scene';
-import { OFF_FX, ON_FX } from './sound';
 import { defaultLevel } from './levels';
 
 export class Game {
