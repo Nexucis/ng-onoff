@@ -5,7 +5,7 @@ import { Game } from './game/game';
   // tslint:disable-next-line:component-selector
   selector: 'ng-onoff',
   templateUrl: './onoff.component.html',
-  styleUrls: [ './onoff.component.css' ]
+  styleUrls: [ './onoff.component.scss' ]
 })
 export class OnoffComponent implements OnInit {
 

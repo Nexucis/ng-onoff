@@ -1,7 +1,5 @@
-:root {
-  --accent: #333;
-  --secondary: #fff;
-}
+$secondary: #fff;
+$accent: #333;
 
 * {
   box-sizing: border-box;
@@ -23,7 +21,6 @@ svg {
   shape-rendering: crispEdges;
   vertical-align: middle;
 }
-
 
 
 /*  Title  */
@@ -48,55 +45,54 @@ svg {
 
 /*  HUD  */
 
-#hud {
+:host ::ng-deep #hud {
   opacity: 0.1;
 }
 
 
 /*  Guy  */
 
-#inner-guy {
+:host ::ng-deep #inner-guy {
   transform-origin: 13px;
 }
 
-.left #inner-guy {
+:host ::ng-deep .left #inner-guy {
   transform: scaleX(-1);
 }
 
-.walk #left_foot,
-.walk #right_foot {
+:host ::ng-deep .walk #left_foot,
+:host ::ng-deep .walk #right_foot {
   animation: walk 0.2s infinite;
 }
 
-.walk #right_foot {
+:host ::ng-deep .walk #right_foot {
   animation-delay: 0.1s;
 }
 
-.walk #head {
+:host ::ng-deep .walk #head {
   animation: walk 0.4s infinite;
   position: relative;
   z-index: 5;
 }
 
-.on #guy .accent,
-.off #face {
-  fill: var(--accent);
+:host ::ng-deep .on #guy .accent,
+:host ::ng-deep .off #face {
+  fill: $accent;
 }
 
-.on #face,
-.off #guy .accent {
-  fill: var(--secondary);
+:host ::ng-deep .on #face,
+:host ::ng-deep .off #guy .accent {
+  fill: $secondary;
 }
-
 
 
 /*  Death Animation  */
 
-#death rect {
+:host ::ng-deep #death rect {
   display: none;
 }
 
-.dying #death rect {
+:host ::ng-deep .dying #death rect {
   animation: death 0.8s infinite;
   display: initial;
   opacity: 0;
@@ -114,48 +110,46 @@ svg {
 }
 
 
-
 /*  Goal  */
 
-#inner-goal {
+:host ::ng-deep #inner-goal {
   animation: pulse 2s infinite;
   shape-rendering: auto;
   transform-origin: 12px 12px;
 }
 
-.finish #inner-goal {
+:host ::ng-deep .finish #inner-goal {
   animation: none;
 }
 
-#inner-goal-finish {
+:host ::ng-deep #inner-goal-finish {
   transition: transform 0.5s;
   transform-origin: 12px 12px;
 }
 
-.finish #inner-goal-finish {
+:host ::ng-deep .finish #inner-goal-finish {
   transform: scale(150);
 }
-
 
 
 /*  Swap Foreground/Background  */
 
 .on > svg {
-  background: var(--secondary);
-  color: var(--accent);
-  fill: var(--accent);
+  background: $secondary;
+  color: $accent;
+  fill: $accent;
 }
 
 .off > svg {
-  background: var(--accent);
-  color: var(--secondary);
-  fill: var(--secondary);
+  background: $accent;
+  color: $secondary;
+  fill: $secondary;
 }
 
-.on .dark, .off .light {
+:host ::ng-deep .on .dark,
+:host ::ng-deep .off .light {
   opacity: 0.1;
 }
-
 
 
 /*  Animations  */
@@ -173,18 +167,16 @@ svg {
 }
 
 
-
 /*  Misc  */
 
-[hidden] {
+:host ::ng-deep [hidden] {
   display: none !important;
 }
 
 
-
 /* Editor */
 
-#dialog {
+:host ::ng-deep #dialog {
   background: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   font-family: 'helvetica neue', helvetica, arial, sans-serif;
