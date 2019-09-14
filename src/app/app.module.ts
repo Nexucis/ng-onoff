@@ -1,18 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NgOnoffModule } from '../../projects/onoff/src/lib/ng-onoff.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OnoffDialogComponent } from './onoff-dialog/onoff-dialog.component';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OnoffDialogComponent
   ],
   imports: [
-    BrowserModule,
-    NgOnoffModule
+    BrowserAnimationsModule,
+    NgOnoffModule,
+    MatDialogModule,
+    MatButtonModule,
+    A11yModule
   ],
+  entryComponents: [ OnoffDialogComponent ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}
