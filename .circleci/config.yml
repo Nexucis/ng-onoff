@@ -50,7 +50,10 @@ jobs:
             - v1-dependencies-
 
       - run: npm run build-lib
-
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - dist/onoff
   lint-app:
     <<: *defaults
     steps:
@@ -74,6 +77,17 @@ jobs:
 
       - run: npm run lint-lib
 
+  publish:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      - run: npm publish --folder=~/repo/dist/onoff --access public --tag ${CIRCLE_TAG}
+
 workflows:
   version: 2
   test-deploy:
@@ -82,12 +96,29 @@ workflows:
       - build-app:
           requires:
             - install
+          filters:
+            tags:
+              ignore: /.*/
       - build-lib:
           requires:
             - install
       - lint-app:
           requires:
             - build-app
+          filters:
+            tags:
+              ignore: /.*/
       - lint-lib:
           requires:
             - build-lib
+          filters:
+            tags:
+              ignore: /.*/
+      - publish:
+          requires:
+            - build-lib
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
