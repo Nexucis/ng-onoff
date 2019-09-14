@@ -1,6 +1,10 @@
 {
   "name": "ng-onoff",
   "version": "0.0.0",
+  "author": {
+    "name": "Augustin Husson",
+    "email": "husson.augustin@gmail.com"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
