@@ -93,6 +93,9 @@ workflows:
   test-deploy:
     jobs:
       - install
+        filters:
+          tags:
+            ignore: /.*/
       - build-app:
           requires:
             - install
