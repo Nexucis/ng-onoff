@@ -5,6 +5,10 @@
     "name": "Augustin Husson",
     "email": "husson.augustin@gmail.com"
   },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 8"
+  },
   "peerDependencies": {
     "@angular/common": "^8.2.4",
     "@angular/core": "^8.2.4"

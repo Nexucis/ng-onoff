@@ -5,12 +5,18 @@
     "name": "Augustin Husson",
     "email": "husson.augustin@gmail.com"
   },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 8"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-lib": "ng build onoff",
     "test": "ng test",
     "lint": "ng lint",
+    "lint-lib": "ng lint onoff",
     "e2e": "ng e2e"
   },
   "private": true,
