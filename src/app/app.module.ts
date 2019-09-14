@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { OnoffModule } from '../../projects/onoff/src/lib/onoff.module';
+import { NgOnoffModule } from '../../projects/onoff/src/lib/ng-onoff.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,7 @@ import { OnoffModule } from '../../projects/onoff/src/lib/onoff.module';
   ],
   imports: [
     BrowserModule,
-    OnoffModule
+    NgOnoffModule
   ],
   providers: [],
   bootstrap: [AppComponent]

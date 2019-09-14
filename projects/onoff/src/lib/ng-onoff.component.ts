@@ -4,10 +4,10 @@ import { Game } from './game/game';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'ng-onoff',
-  templateUrl: './onoff.component.html',
-  styleUrls: [ './onoff.component.scss' ]
+  templateUrl: './ng-onoff.component.html',
+  styleUrls: [ './ng-onoff.component.scss' ]
 })
-export class OnoffComponent implements OnInit {
+export class NgOnoffComponent implements OnInit {
 
   constructor() {
   }
