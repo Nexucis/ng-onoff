@@ -92,10 +92,10 @@ workflows:
   version: 2
   test-deploy:
     jobs:
-      - install
-        filters:
-          tags:
-            ignore: /.*/
+      - install:
+          filters:
+            tags:
+              ignore: /.*/
       - build-app:
           requires:
             - install
