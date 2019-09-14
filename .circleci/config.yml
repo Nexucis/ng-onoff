@@ -86,7 +86,7 @@ jobs:
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
-      - run: npm publish --folder=~/repo/dist/onoff --access public --tag ${CIRCLE_TAG}
+      - run: npm publish --folder=~/repo/dist/onoff --access public
 
 workflows:
   version: 2
