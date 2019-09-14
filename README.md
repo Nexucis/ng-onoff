@@ -46,6 +46,12 @@ And then use the component in a container that suits you :)
 
 ```
 
+## Contributions
+Any contribution or suggestion would be really appreciated. Feel free to use the Issue section or to send a pull request.
+
+## Development
+The repository provide a light demo to play with the onOff component and to try an integration with angular material.
+
 ## License
 
 The MIT License ([MIT](./LICENSE))
