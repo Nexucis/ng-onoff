@@ -3,11 +3,51 @@ import { GoalPosition } from './goal';
 import { BarPosition } from './bar';
 import { SpikePosition } from './spikes';
 
-const getRandomInt = (min, max) => {
+function getRandomInt(min: number, max: number): number {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
-};
+}
+
+function generateBarPosition(barArray: number[],
+                             x: (num) => number,
+                             y: (num?: number) => number,
+                             width: (num?: number) => number,
+                             height: (num?: number) => number,
+                             on: (num?: number) => boolean): BarPosition[] {
+  const result = [];
+  barArray.map((val) => {
+    result.push({
+      x: x(val),
+      y: y(val),
+      width: width(val),
+      height: height(val),
+      on: on(val),
+    });
+  });
+  return result;
+}
+
+function generateSpikePosition(barArray: number[],
+                               x: (num) => number,
+                               y: (num?: number) => number,
+                               width: (num?: number) => number,
+                               height: (num?: number) => number,
+                               on: (num?: number) => boolean,
+                               dir: string): SpikePosition[] {
+  const result = [];
+  barArray.map((val) => {
+    result.push({
+      x: x(val),
+      y: y(val),
+      width: width(val),
+      height: height(val),
+      on: on(val),
+      direction: dir,
+    });
+  });
+  return result;
+}
 
 export class Level {
   guyPosition: GuyPosition;
@@ -75,106 +115,311 @@ export const defaultLevel: Level[] = [
       {x: 320, y: 448, width: 128, height: 32, on: true},
       {x: 576, y: 448, width: 128, height: 32, on: false},
     ]
-  )
-];
-
-/*export const defaultLevel = [
+  ),
   // https://cl.ly/e7a2d2ecc0e7
-  [ [ 24, 399 ], [ 604, 152 ], [ [ 0, 448, 768, 32, 1 ], [ 128, 320, 512, 8, 1 ], [ 632, 328, 8, 120, 1 ], [ 128, 192, 512, 8, 1 ], [ 128, 200, 8, 120, 1 ], [ 640, 384, 128, 8, 0 ], [ 0, 256, 128, 8, 0 ] ], [] ],
+  new Level(
+    {x: 24, y: 399},
+    {x: 604, y: 152},
+    [
+      {x: 0, y: 448, width: 768, height: 32, on: true},
+      {x: 128, y: 320, width: 512, height: 8, on: true},
+      {x: 632, y: 328, width: 8, height: 120, on: true},
+      {x: 128, y: 192, width: 512, height: 8, on: true},
+      {x: 128, y: 200, width: 8, height: 120, on: true},
+      {x: 640, y: 384, width: 128, height: 8, on: false},
+      {x: 0, y: 256, width: 128, height: 8, on: false},
+    ]
+  ),
   // https://cl.ly/c3c9ccaf76a3
-  [ [ 16, 275 ], [ 566, 248 ], [ [ 0, 0, 768, 64, 1 ], [ 0, 64, 128, 192, 1 ], [ 0, 324, 248, 92, 1 ], [ 0, 416, 768, 64, 1 ], [ 192, 132, 180, 96, 1 ], [ 440, 64, 100, 224, 1 ], [ 620, 112, 72, 245, 1 ], [ 192, 228, 56, 96, 1 ], [ 300, 288, 320, 69, 1 ] ], [] ],
+  new Level(
+    {x: 16, y: 275},
+    {x: 566, y: 248},
+    [
+      {x: 0, y: 0, width: 768, height: 64, on: true},
+      {x: 0, y: 64, width: 128, height: 192, on: true},
+      {x: 0, y: 324, width: 248, height: 92, on: true},
+      {x: 0, y: 416, width: 768, height: 64, on: true},
+      {x: 192, y: 132, width: 180, height: 96, on: true},
+      {x: 440, y: 64, width: 100, height: 224, on: true},
+      {x: 620, y: 112, width: 72, height: 245, on: true},
+      {x: 192, y: 228, width: 56, height: 96, on: true},
+      {x: 300, y: 288, width: 320, height: 69, on: true},
+    ]
+  ),
   // https://cl.ly/91292cb165a6
-  [ [ 16, 367 ], [ 704, 84 ], [ [ 0, 416, 244, 64, 1 ], [ 524, 128, 244, 352, 1 ], [ 288, 320, 64, 160, 0 ], [ 416, 224, 64, 256, 0 ] ], [] ],
+  new Level(
+    {x: 16, y: 367},
+    {x: 704, y: 84},
+    [
+      {x: 0, y: 416, width: 244, height: 64, on: true},
+      {x: 524, y: 128, width: 244, height: 352, on: true},
+      {x: 288, y: 320, width: 64, height: 160, on: false},
+      {x: 416, y: 224, width: 64, height: 256, on: false},
+    ]
+  ),
   // https://cl.ly/dd353a0a4faf
-  [ [ 104, 175 ], [ 176, 32 ], [ [ 96, 224, 56, 8, 1 ], [ 96, 232, 56, 8, 0 ], [ 144, 72, 8, 152, 1 ], [ 152, 72, 8, 168, 0 ], [ 160, 72, 128, 92, 1 ], [ 160, 164, 256, 92, 1 ], [ 160, 256, 384, 92, 1 ], [ 544, 256, 8, 92, 0 ], [ 160, 348, 512, 92, 1 ], [ 160, 440, 512, 8, 0 ], [ 552, 340, 120, 8, 0 ] ], [] ],
+  new Level(
+    {x: 104, y: 175},
+    {x: 176, y: 32},
+    [
+      {x: 96, y: 224, width: 56, height: 8, on: true},
+      {x: 96, y: 232, width: 56, height: 8, on: false},
+      {x: 144, y: 72, width: 8, height: 152, on: true},
+      {x: 152, y: 72, width: 8, height: 168, on: false},
+      {x: 160, y: 72, width: 128, height: 92, on: true},
+      {x: 160, y: 164, width: 256, height: 92, on: true},
+      {x: 160, y: 256, width: 384, height: 92, on: true},
+      {x: 544, y: 256, width: 8, height: 92, on: false},
+      {x: 160, y: 348, width: 512, height: 92, on: true},
+      {x: 160, y: 440, width: 512, height: 8, on: false},
+      {x: 552, y: 340, width: 120, height: 8, on: false}
+    ]
+  ),
   // https://cl.ly/752bc2a6a72f
-  [ [ 16, 422 ], [ 724, 416 ], [ [ 0, 472, 48, 8, 1 ], [ 0, 376, 48, 8, 0 ], [ 0, 280, 48, 8, 1 ], [ 0, 184, 96, 8, 0 ], [ 384, 456, 384, 24, 1 ] ], [] ],
+  new Level(
+    {x: 16, y: 422},
+    {x: 724, y: 416},
+    [
+      {x: 0, y: 472, width: 48, height: 8, on: true},
+      {x: 0, y: 376, width: 48, height: 8, on: false},
+      {x: 0, y: 280, width: 48, height: 8, on: true},
+      {x: 0, y: 184, width: 96, height: 8, on: false},
+      {x: 384, y: 456, width: 384, height: 24, on: true},
+    ]
+  ),
   // https://cl.ly/13b3b6c2966d
-  [ [ 16, 239 ], [ 724, 244 ], [ [ 0, 288, 768, 192, 1 ], [ 336, 0, 96, 288, 1 ] ], [] ],
+  new Level(
+    {x: 16, y: 239},
+    {x: 724, y: 244},
+    [
+      {x: 0, y: 288, width: 768, height: 192, on: true},
+      {x: 336, y: 0, width: 96, height: 288, on: true},
+    ]
+  ),
   // https://cl.ly/74d75c6b6df7
-  [ [ 16, 56 ], [ 724, 216 ],
-    [ 0, 1, 2, 3, 4, 5, 6, 7 ].map((x) => [ x * 96, getRandomInt(240, 300), getRandomInt(24, 72), getRandomInt(24, 180), getRandomInt(0, 2) ])
-    , [] ],
+  new Level(
+    {x: 16, y: 56},
+    {x: 724, y: 216},
+    generateBarPosition([ 0, 1, 2, 3, 4, 5, 6, 7 ],
+      (x) => x * 96,
+      () => getRandomInt(240, 300),
+      () => getRandomInt(24, 72),
+      () => getRandomInt(24, 180),
+      () => getRandomInt(0, 2) === 1),
+  ),
   // https://cl.ly/129369ca9d9d
-  [ [ 48, 383 ], [ 696, 384 ], [ [ 48, 432, 24, 24, 1 ], [ 156, 348, 24, 24, 0 ], [ 48, 264, 24, 24, 1 ], [ 156, 180, 24, 24, 0 ], [ 264, 180, 24, 24, 1 ], [ 372, 180, 24, 24, 0 ], [ 480, 180, 24, 24, 1 ], [ 588, 180, 24, 24, 0 ], [ 696, 264, 24, 24, 1 ], [ 588, 348, 24, 24, 0 ], [ 696, 432, 24, 24, 1 ] ], [] ],
+  new Level(
+    {x: 48, y: 383},
+    {x: 696, y: 384},
+    [
+      {x: 48, y: 432, width: 24, height: 24, on: true},
+      {x: 156, y: 348, width: 24, height: 24, on: false},
+      {x: 48, y: 264, width: 24, height: 24, on: true},
+      {x: 156, y: 180, width: 24, height: 24, on: false},
+      {x: 264, y: 180, width: 24, height: 24, on: true},
+      {x: 372, y: 180, width: 24, height: 24, on: false},
+      {x: 480, y: 180, width: 24, height: 24, on: true},
+      {x: 588, y: 180, width: 24, height: 24, on: false},
+      {x: 696, y: 264, width: 24, height: 24, on: true},
+      {x: 588, y: 348, width: 24, height: 24, on: false},
+      {x: 696, y: 432, width: 24, height: 24, on: true},
+    ]
+  ),
   // https://cl.ly/de15c9f04a7d
-  [ [ 24, 8 ], [ 724, getRandomInt(128, 416) ],
-    [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ].map((x) => [ x * 32, getRandomInt(64, 464), 8, 8, getRandomInt(0, 2) ])
-    , [] ],
+  new Level(
+    {x: 24, y: 8},
+    {x: 724, y: getRandomInt(128, 416)},
+    generateBarPosition([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ],
+      (x) => x * 32,
+      () => getRandomInt(64, 464),
+      () => 8,
+      () => 8,
+      () => getRandomInt(0, 2) === 1)
+  ),
   // https://cl.ly/aef7878e8263
-  [ [ 372, 391 ], [ 372, 20 ], [ [ 320, 440, 128, 8, 1 ], [ 320, 344, 128, 8, 0 ], [ 320, 248, 128, 8, 1 ], [ 320, 152, 128, 8, 0 ] ], [ [ 320, 448, 128, 8, 1, 'down' ], [ 320, 352, 128, 8, 0, 'down' ], [ 320, 256, 128, 8, 1, 'down' ], [ 320, 160, 128, 8, 0, 'down' ] ] ],
+  new Level(
+    {x: 372, y: 391},
+    {x: 372, y: 20},
+    [
+      {x: 320, y: 440, width: 128, height: 8, on: true},
+      {x: 320, y: 344, width: 128, height: 8, on: false},
+      {x: 320, y: 248, width: 128, height: 8, on: true},
+      {x: 320, y: 152, width: 128, height: 8, on: false},
+    ],
+    [
+      {x: 320, y: 448, width: 128, height: 8, on: true, direction: 'down'},
+      {x: 320, y: 352, width: 128, height: 8, on: false, direction: 'down'},
+      {x: 320, y: 256, width: 128, height: 8, on: true, direction: 'down'},
+      {x: 320, y: 160, width: 128, height: 8, on: false, direction: 'down'}
+    ]
+  ),
   // https://cl.ly/bfc474be92d1
-  [ [ 372, 15 ], [ 372, 418 ], [ [ 320, 64, 128, 16, 1 ], [ 256, 80, 256, 128, 0 ], [ 320, 208, 128, 16, 1 ], [ 348, 224, 72, 160, 1 ], [ 348, 384, 8, 96, 1 ], [ 356, 384, 8, 96, 0 ], [ 412, 384, 8, 96, 1 ], [ 404, 384, 8, 96, 0 ] ], [ [ 312, 64, 8, 16, 1, 'left' ], [ 448, 64, 8, 16, 1, 'right' ], [ 312, 208, 8, 16, 1, 'left' ], [ 448, 208, 8, 16, 1, 'right' ] ] ],
+  new Level(
+    {x: 372, y: 15},
+    {x: 372, y: 418},
+    [
+      {x: 320, y: 64, width: 128, height: 16, on: true},
+      {x: 256, y: 80, width: 256, height: 128, on: false},
+      {x: 320, y: 208, width: 128, height: 16, on: true},
+      {x: 348, y: 224, width: 72, height: 160, on: true},
+      {x: 348, y: 384, width: 8, height: 96, on: true},
+      {x: 356, y: 384, width: 8, height: 96, on: false},
+      {x: 412, y: 384, width: 8, height: 96, on: true},
+      {x: 404, y: 384, width: 8, height: 96, on: false}
+    ],
+    [
+      {x: 312, y: 64, width: 8, height: 16, on: true, direction: 'left'},
+      {x: 448, y: 64, width: 8, height: 16, on: true, direction: 'right'},
+      {x: 312, y: 208, width: 8, height: 16, on: true, direction: 'left'},
+      {x: 448, y: 208, width: 8, height: 16, on: true, direction: 'right'}
+    ]
+  ),
   // https://cl.ly/38831ab3bb46
-  [ [ 24, 64 ], [ 724, getRandomInt(128, 416) ], [ [ 0, getRandomInt(128, 352), 768, 2, true ] ],
-    [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ].map((x) =>
-      [ x * 48, getRandomInt(128, 352), 16, 8, getRandomInt(0, 2), 'up' ]
-    )
-  ],
-  [ [ 371, 20 ], [ 372, 372 ], [
-    [ 336, 320, 96, 8, true ],
-    [ 336, 416, 96, 8, true ],
-    [ 336, 328, 8, 88, true ],
-    [ 424, 328, 8, 88, true ],
-  ], [
-    [ 336, 312, 96, 8, true, 'up' ]
-  ] ],
+  new Level(
+    {x: 24, y: 64},
+    {x: 724, y: getRandomInt(128, 416)},
+    [
+      {x: 0, y: getRandomInt(128, 352), width: 768, height: 2, on: true},
+    ],
+    generateSpikePosition([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ],
+      (x) => x * 48,
+      () => getRandomInt(128, 352),
+      () => 16,
+      () => 8,
+      () => getRandomInt(0, 2) === 1,
+      'up'),
+  ),
+  new Level(
+    {x: 371, y: 20},
+    {x: 372, y: 372},
+    [
+      {x: 336, y: 320, width: 96, height: 8, on: true},
+      {x: 336, y: 416, width: 96, height: 8, on: true},
+      {x: 336, y: 328, width: 8, height: 88, on: true},
+      {x: 424, y: 328, width: 8, height: 88, on: true},
+    ],
+    [
+      {x: 336, y: 312, width: 96, height: 8, on: true, direction: 'up'},
+    ]
+  ),
   // https://cl.ly/bb5826e004eb
-  [ [ 371, 20 ], [ 584, 404 ], [
-    [ 0, 152, 368, 8, true ],
-    [ 0, 248, 448, 8, true ],
-    [ 0, 344, 528, 8, true ],
-  ], [
-    [ 0, 144, 368, 8, true, 'up' ],
-    [ 0, 240, 448, 8, true, 'up' ],
-    [ 0, 336, 528, 8, true, 'up' ],
-  ] ],
+  new Level(
+    {x: 371, y: 20},
+    {x: 584, y: 404},
+    [
+      {x: 0, y: 152, width: 368, height: 8, on: true},
+      {x: 0, y: 248, width: 448, height: 8, on: true},
+      {x: 0, y: 344, width: 528, height: 8, on: true},
+    ],
+    [
+      {x: 0, y: 144, width: 368, height: 8, on: true, direction: 'up'},
+      {x: 0, y: 240, width: 448, height: 8, on: true, direction: 'up'},
+      {x: 0, y: 336, width: 528, height: 8, on: true, direction: 'up'},
+    ]
+  ),
   // https://cl.ly/130ada902b79
-  [ [ 12, 312 ], [ 725, 307 ], [
-    [ 0, 152, 768, 72, true ],
-    [ 0, 362, 64, 8, true ],
-    [ 192, 362, 128, 8, true ],
-    [ 448, 362, 128, 8, true ],
-    [ 704, 362, 64, 8, true ]
-  ], [
-    [ 0, 224, 768, 8, true, 'down' ],
-  ] ],
+  new Level(
+    {x: 12, y: 312},
+    {x: 725, y: 307},
+    [
+      {x: 0, y: 152, width: 768, height: 72, on: true},
+      {x: 0, y: 362, width: 64, height: 8, on: true},
+      {x: 192, y: 362, width: 128, height: 8, on: true},
+      {x: 448, y: 362, width: 128, height: 8, on: true},
+      {x: 704, y: 362, width: 64, height: 8, on: true},
+    ],
+    [
+      {x: 0, y: 224, width: 768, height: 8, on: true, direction: 'up'},
+    ]
+  ),
   // https://cl.ly/be19660c5789
-  [ [ 371, 20 ], [ 372, 404 ], [
-    [ 320, 384, 128, 8, true ],
-    [ 320, 272, 128, 8, false ],
-    [ 320, 168, 128, 8, true ],
-  ], [
-    [ 320, 376, 128, 8, true, 'up' ],
-    [ 320, 264, 128, 8, false, 'up' ],
-    [ 320, 160, 128, 8, true, 'up' ],
-  ] ],
+  new Level(
+    {x: 371, y: 20},
+    {x: 372, y: 404},
+    [
+      {x: 320, y: 384, width: 128, height: 8, on: true},
+      {x: 320, y: 272, width: 128, height: 8, on: false},
+      {x: 320, y: 168, width: 128, height: 8, on: true},
+    ],
+    [
+      {x: 320, y: 376, width: 128, height: 8, on: true, direction: 'up'},
+      {x: 320, y: 264, width: 128, height: 8, on: false, direction: 'up'},
+      {x: 320, y: 160, width: 128, height: 8, on: true, direction: 'up'},
+    ]
+  ),
   // https://cl.ly/52c9d3f5f7e6
-  [ [ 63, 263 ], [ 660, 272 ], [ [ 48, 312, 96, 96, 1 ], [ 144, 124, 48, 284, 1 ], [ 192, 124, 96, 96, 1 ], [ 192, 312, 96, 96, 0 ], [ 288, 124, 48, 284, 1 ], [ 336, 312, 96, 96, 1 ], [ 432, 124, 48, 284, 1 ], [ 480, 124, 96, 96, 1 ], [ 480, 312, 96, 96, 0 ], [ 576, 124, 48, 284, 1 ], [ 624, 312, 96, 96, 1 ] ], [ [ 232, 304, 16, 8, 0, 'up' ], [ 520, 304, 16, 8, 0, 'up' ] ] ],
+  new Level(
+    {x: 63, y: 263},
+    {x: 660, y: 272},
+    [
+      {x: 48, y: 312, width: 96, height: 96, on: true},
+      {x: 144, y: 124, width: 48, height: 284, on: true},
+      {x: 192, y: 124, width: 96, height: 96, on: true},
+      {x: 192, y: 312, width: 96, height: 96, on: false},
+      {x: 288, y: 124, width: 48, height: 284, on: true},
+      {x: 336, y: 312, width: 96, height: 96, on: true},
+      {x: 432, y: 124, width: 48, height: 284, on: true},
+      {x: 480, y: 124, width: 96, height: 96, on: true},
+      {x: 480, y: 312, width: 96, height: 96, on: false},
+      {x: 576, y: 124, width: 48, height: 284, on: true},
+      {x: 624, y: 312, width: 96, height: 96, on: true},
+    ],
+    [
+      {x: 232, y: 304, width: 16, height: 8, on: false, direction: 'up'},
+      {x: 520, y: 304, width: 16, height: 8, on: false, direction: 'up'},
+    ]
+  ),
   // https://cl.ly/f83f4b0bb02d
-  [ [ 148, 254 ], [ 600, 266 ], [
-    [ 94, 176, 8, 128, true ],
-    [ 222, 176, 8, 128, true ],
-    [ 94, 168, 136, 8, true ],
-    [ 94, 304, 136, 8, true ],
-    [ 318, 176, 8, 128, true ],
-    [ 446, 176, 8, 128, true ],
-    [ 318, 168, 136, 8, true ],
-    [ 318, 304, 136, 8, true ],
-    [ 542, 176, 8, 128, true ],
-    [ 670, 176, 8, 128, true ],
-    [ 542, 168, 136, 8, true ],
-    [ 542, 304, 136, 8, true ]
-  ], [] ],
+  new Level(
+    {x: 148, y: 254},
+    {x: 600, y: 266},
+    [
+      {x: 94, y: 176, width: 8, height: 128, on: true},
+      {x: 222, y: 176, width: 8, height: 128, on: true},
+      {x: 94, y: 168, width: 136, height: 8, on: true},
+      {x: 94, y: 304, width: 136, height: 8, on: true},
+      {x: 318, y: 176, width: 8, height: 128, on: true},
+      {x: 446, y: 176, width: 8, height: 128, on: true},
+      {x: 318, y: 168, width: 136, height: 8, on: true},
+      {x: 318, y: 304, width: 136, height: 8, on: true},
+      {x: 542, y: 176, width: 8, height: 128, on: true},
+      {x: 670, y: 176, width: 8, height: 128, on: true},
+      {x: 542, y: 168, width: 136, height: 8, on: true},
+      {x: 542, y: 304, width: 136, height: 8, on: true},
+    ],
+  ),
   // https://cl.ly/0d180032f589
-  [ [ 400, 20 ], [ 372, 432 ], [], [
-    [ 0, 96, 384, 8, true, 'up' ],
-    [ 0, 104, 384, 8, false, 'down' ],
-    [ 400, 240, 368, 8, true, 'up' ],
-    [ 400, 248, 368, 8, false, 'down' ],
-    [ 0, 384, 384, 8, true, 'up' ],
-    [ 0, 392, 384, 8, false, 'down' ],
-  ] ],
+  new Level(
+    {x: 400, y: 20},
+    {x: 372, y: 432},
+    [],
+    [
+      {x: 0, y: 96, width: 384, height: 8, on: true, direction: 'up'},
+      {x: 0, y: 104, width: 384, height: 8, on: true, direction: 'down'},
+      {x: 400, y: 240, width: 368, height: 8, on: true, direction: 'up'},
+      {x: 400, y: 248, width: 368, height: 8, on: true, direction: 'down'},
+      {x: 0, y: 384, width: 384, height: 8, on: true, direction: 'up'},
+      {x: 0, y: 392, width: 384, height: 8, on: true, direction: 'down'},
+    ],
+  ),
   // https://cl.ly/d11a48fe9b24
-  [ [ 368, 14 ], [ 269, 419 ], [], [ [ 328, 32, 8, 80, 1, 'right' ], [ 320, 32, 8, 80, 0, 'left' ], [ 424, 32, 8, 80, 1, 'left' ], [ 432, 32, 8, 80, 0, 'right' ], [ 280, 175, 8, 80, 1, 'right' ], [ 272, 174, 8, 80, 0, 'left' ], [ 376, 175, 8, 80, 1, 'left' ], [ 384, 175, 8, 80, 0, 'right' ], [ 232, 320, 8, 80, 1, 'right' ], [ 224, 319, 8, 80, 0, 'left' ], [ 328, 320, 8, 80, 1, 'left' ], [ 336, 319, 8, 80, 0, 'right' ] ] ]
-];*/
+  new Level(
+    {x: 368, y: 14},
+    {x: 269, y: 419},
+    [],
+    [
+      {x: 328, y: 32, width: 8, height: 80, on: true, direction: 'right'},
+      {x: 320, y: 32, width: 8, height: 80, on: false, direction: 'left'},
+      {x: 424, y: 32, width: 8, height: 80, on: true, direction: 'left'},
+      {x: 432, y: 32, width: 8, height: 80, on: false, direction: 'right'},
+      {x: 280, y: 175, width: 8, height: 80, on: true, direction: 'right'},
+      {x: 272, y: 174, width: 8, height: 80, on: false, direction: 'left'},
+      {x: 376, y: 175, width: 8, height: 80, on: true, direction: 'left'},
+      {x: 384, y: 175, width: 8, height: 80, on: false, direction: 'right'},
+      {x: 232, y: 320, width: 8, height: 80, on: true, direction: 'right'},
+      {x: 224, y: 319, width: 8, height: 80, on: false, direction: 'left'},
+      {x: 328, y: 320, width: 8, height: 80, on: true, direction: 'left'},
+      {x: 336, y: 319, width: 8, height: 80, on: false, direction: 'right'}
+    ],
+  ),
+];
