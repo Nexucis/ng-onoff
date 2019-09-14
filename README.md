@@ -4,6 +4,24 @@
 
 This is an angular module that can be helped to integrate the original game [OnOff](https://github.com/starzonmyarmz/js13k-2018)
 
+### Versioning
+This project uses the following version rules: 
+
+```
+X.Y.Z
+```
+
+Where : 
+* X is the major version of Angular supported by this project
+* Y is the major version of this library. Be careful with this rule, you can have some breaking changes between two **Y** number. 
+* Z is the minor version of this library. It will be increased when there are some bug fixes.
+
+### Supported Version
+
+| Angular Version | Support Branch  |
+| --------------- | --------------- |
+| >= 8.0          | master          |
+
 ## Installation
 
 ```bash
