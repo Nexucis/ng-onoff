@@ -102,6 +102,9 @@ workflows:
       - build-lib:
           requires:
             - install
+          filters:
+            tags:
+              only: /.*/
       - lint-app:
           requires:
             - build-app
