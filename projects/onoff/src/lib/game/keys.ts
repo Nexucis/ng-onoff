@@ -1,5 +1,5 @@
-export const DOWN = new Set;
-export const PRESSED = new Set;
+export const DOWN = new Set();
+export const PRESSED = new Set();
 
 const NO_DEFAULT = new Set([
   'w',
