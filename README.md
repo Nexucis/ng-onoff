@@ -1,6 +1,6 @@
 # Angular Component OnOff
 
-[![CircleCI](https://circleci.com/gh/Nexucis/ng-onoff.svg?style=shield)](https://circleci.com/gh/Nexucis/ng-onoff)
+[![CircleCI](https://circleci.com/gh/Nexucis/ng-onoff.svg?style=shield)](https://circleci.com/gh/Nexucis/ng-onoff) [![npm version](https://badge.fury.io/js/ng-onoff.svg)](https://badge.fury.io/js/ng-onoff) [![License](https://img.shields.io/:license-mit-blue.svg)](LICENSE.md)
 
 This is an angular module that can be helped to integrate the original game [OnOff](https://github.com/starzonmyarmz/js13k-2018)
 
@@ -37,7 +37,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NgOnoffModule } from 'ng-onoff/ng-onoff.module';
+import { NgOnoffModule } from 'ng-onoff';
 
 @NgModule({
   declarations: [
