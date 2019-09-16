@@ -1,7 +1,7 @@
 export const DOWN = new Set();
 export const PRESSED = new Set();
 
-const NO_DEFAULT = new Set([
+export const NO_DEFAULT = new Set([
   'w',
   'a',
   's',
@@ -24,17 +24,6 @@ export const leftKey = () => (
 export const rightKey = () => (
   DOWN.has('d') || DOWN.has('ArrowRight') || PRESSED.has(15)
 );
-
-document.addEventListener('keydown', (event) => {
-  DOWN.add(event.key);
-  if (NO_DEFAULT.has(event.key)) {
-    event.preventDefault();
-  }
-});
-
-document.addEventListener('keyup', ({key}) => {
-  DOWN.delete(key);
-});
 
 const HANDLERS = new Map<any, any>();
 export const onPress = (index, f) => {
