@@ -12,8 +12,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "build-lib": "ng build onoff",
+    "build": "ng build --configuration production",
+    "build-lib": "ng build onoff --configuration production",
     "test": "ng test",
     "lint": "ng lint onoff",
     "lint-lib": "ng lint ng-onoff",
