@@ -1,4 +1,4 @@
-export default (delay) => new Promise((resolve, reject) => {
+export default (delay) => new Promise<void>((resolve, reject) => {
   const start = performance.now();
   requestAnimationFrame(function check(now) {
     if (now >= start + delay) {
