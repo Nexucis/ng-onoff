@@ -10,8 +10,8 @@
     "node": ">= 10"
   },
   "peerDependencies": {
-    "@angular/common": "^8.2.4",
-    "@angular/core": "^8.2.4"
+    "@angular/common": "^13.0.2",
+    "@angular/core": "^13.0.2"
   },
   "repository": {
     "type": "git",
