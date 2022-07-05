@@ -11,22 +11,21 @@ import { MatInputModule } from '@angular/material/input';
 import { A11yModule } from '@angular/cdk/a11y';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    OnoffDialogComponent
-  ],
-  imports: [
-    BrowserAnimationsModule,
-    NgOnoffModule,
-    MatDialogModule,
-    MatButtonModule,
-    A11yModule,
-    MatFormFieldModule,
-    MatInputModule
-  ],
-  entryComponents: [ OnoffDialogComponent ],
-  providers: [],
-  bootstrap: [ AppComponent ]
+    declarations: [
+        AppComponent,
+        OnoffDialogComponent
+    ],
+    imports: [
+        BrowserAnimationsModule,
+        NgOnoffModule,
+        MatDialogModule,
+        MatButtonModule,
+        A11yModule,
+        MatFormFieldModule,
+        MatInputModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
