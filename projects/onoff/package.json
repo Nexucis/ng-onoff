@@ -1,6 +1,6 @@
 {
   "name": "ng-onoff",
-  "version": "13.0.1",
+  "version": "14.0.0",
   "author": {
     "name": "Augustin Husson",
     "email": "husson.augustin@gmail.com"
@@ -10,8 +10,8 @@
     "node": ">= 10"
   },
   "peerDependencies": {
-    "@angular/common": "^13.0.2",
-    "@angular/core": "^13.0.2"
+    "@angular/common": "^14.0.4",
+    "@angular/core": "^14.0.4"
   },
   "repository": {
     "type": "git",
