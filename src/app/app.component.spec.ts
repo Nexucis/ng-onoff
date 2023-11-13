@@ -1,8 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { MatLegacyDialogModule } from '@angular/material/legacy-dialog';
-import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacyInputModule } from '@angular/material/legacy-input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
@@ -13,9 +13,9 @@ describe('AppComponent', () => {
       ],
       imports: [
         NoopAnimationsModule,
-        MatLegacyDialogModule,
-        MatLegacyFormFieldModule,
-        MatLegacyInputModule
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule
       ]
     }).compileComponents();
   }));
