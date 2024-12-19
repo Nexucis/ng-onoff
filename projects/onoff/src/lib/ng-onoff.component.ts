@@ -3,10 +3,11 @@ import { Game } from './game/game';
 import { DOWN, NO_DEFAULT } from './game/keys';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'ng-onoff',
-  templateUrl: './ng-onoff.component.html',
-  styleUrls: ['./ng-onoff.component.scss']
+    // tslint:disable-next-line:component-selector
+    selector: 'ng-onoff',
+    templateUrl: './ng-onoff.component.html',
+    styleUrls: ['./ng-onoff.component.scss'],
+    standalone: false
 })
 export class NgOnoffComponent implements OnInit {
 
