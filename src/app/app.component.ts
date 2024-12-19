@@ -3,9 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { OnoffDialogComponent } from './onoff-dialog/onoff-dialog.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent {
   constructor(public dialog: MatDialog) {
