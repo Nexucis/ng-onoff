@@ -1,17 +1,17 @@
 {
   "name": "ng-onoff",
-  "version": "19.0.0",
+  "version": "20.0.0",
   "author": {
     "name": "Augustin Husson",
     "email": "husson.augustin@gmail.com"
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 20"
+    "node": ">= 22"
   },
   "peerDependencies": {
-    "@angular/common": "^19.0.5",
-    "@angular/core": "^19.0.5"
+    "@angular/common": "^20.0.1",
+    "@angular/core": "^20.0.1"
   },
   "repository": {
     "type": "git",
