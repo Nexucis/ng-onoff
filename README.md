@@ -1,3 +1,9 @@
+# Archived
+This ng-onoff has some good days. We had a lot of fun. Now it looks like Angular 20 migration just did us. 
+If somebody want to take it back feel free. It works until Angular 19. 
+
+Bye bye :wave:
+
 # Angular Component OnOff
 
 [![CircleCI](https://circleci.com/gh/Nexucis/ng-onoff.svg?style=shield)](https://circleci.com/gh/Nexucis/ng-onoff) [![npm version](https://badge.fury.io/js/ng-onoff.svg)](https://badge.fury.io/js/ng-onoff) [![License](https://img.shields.io/:license-mit-blue.svg)](LICENSE.md)
